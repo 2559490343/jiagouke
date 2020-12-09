@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+    <!-- <script src="../node_modules/vue-next/packages/reactivity/dist/reactivity.global.js"></script> -->
+    <script src="../dist/bundle.js"></script>
+    <script>
+        const { reactive, effect, computed } = VueObserver
+
+        let state = reactive({ name: 'xyc', age: 22 })
+        let i = 0;
+        let myAge = computed(() => {
+            return state.age + 10
+        })
+        console.log(myAge);
+        effect(() => {
+            app.innerHTML = `我叫${state.name},我今年${myAge.value}岁`
+            console.log(i++);
+        })
+        setTimeout(() => {
+            state.age++
+        }, 1000);
+        setTimeout(() => {
+            state.age++
+        }, 2000);
+    </script>
+</body>
+
+</html>
